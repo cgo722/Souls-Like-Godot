@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dj51ia8d51gss"]
+[gd_scene load_steps=13 format=3 uid="uid://dj51ia8d51gss"]
 
 [ext_resource type="Terrain3DStorage" uid="uid://ch7shlla4rglu" path="res://Scenes/Floor 1 Terrain.res" id="1_tbagt"]
+[ext_resource type="PackedScene" uid="uid://bcarj1k6firch" path="res://Scenes/Player.tscn" id="2_nwecu"]
 
 [sub_resource type="Gradient" id="Gradient_ojcbm"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -91,3 +92,6 @@ transform = Transform3D(0.482639, 0, 0, 0, 5.96605, 0, 0, 0, 24.552, 8.16367, 2.
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(7.84439, 0, 0, 0, 1.40413, 0, 0, 0, 24.552, 4.06065, 5.54034, 0)
 size = Vector3(1.04401, 1, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_nwecu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62892, 1.73882, 14.6651)
