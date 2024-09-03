@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dj51ia8d51gss"]
+[gd_scene load_steps=16 format=3 uid="uid://dj51ia8d51gss"]
 
 [ext_resource type="Terrain3DStorage" uid="uid://ch7shlla4rglu" path="res://Scenes/Floor 1 Terrain.res" id="1_tbagt"]
-[ext_resource type="PackedScene" uid="uid://bcarj1k6firch" path="res://Scenes/Player.tscn" id="2_nwecu"]
+[ext_resource type="Environment" uid="uid://bp5bhb7uflf4n" path="res://Scenes/Floor 1.tres" id="3_cflmo"]
+[ext_resource type="PackedScene" uid="uid://bcarj1k6firch" path="res://Scenes/Player.tscn" id="4_cv6df"]
 
 [sub_resource type="Gradient" id="Gradient_ojcbm"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -36,37 +37,53 @@ _shader_parameters = {
 "noise2_scale": 0.076,
 "noise3_scale": 0.225,
 "noise_texture": SubResource("NoiseTexture2D_f61ao"),
-"vertex_normals_distance": 128.0
+"vertex_normals_distance": 128.0,
+"world_noise_blend_far": 1.0,
+"world_noise_blend_near": 0.5,
+"world_noise_height": 64.0,
+"world_noise_lod_distance": 7500.0,
+"world_noise_max_octaves": 4,
+"world_noise_min_octaves": 2,
+"world_noise_offset": Vector3(0, 0, 0),
+"world_noise_scale": 5.0
 }
+world_background = 2
 show_checkered = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4vr4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr62m"]
 cull_mode = 2
 vertex_color_use_as_albedo = true
 backlight_enabled = true
 backlight = Color(0.5, 0.5, 0.5, 1)
 
-[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_0cbny"]
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_q7cf0"]
 height_offset = 0.5
 density = 10.0
-material_override = SubResource("StandardMaterial3D_e4vr4")
+material_override = SubResource("StandardMaterial3D_rr62m")
+generated_type = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n67mv"]
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_mkol4"]
+id = 1
+height_offset = 0.5
+density = 10.0
+material_override = SubResource("StandardMaterial3D_n67mv")
 generated_type = 1
 
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_ie1qh"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_0cbny")])
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_q7cf0"), SubResource("Terrain3DMeshAsset_mkol4")])
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_uxfr6"]
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_500wa"]
+auto_exposure_enabled = true
 
-[sub_resource type="Sky" id="Sky_ogklk"]
-sky_material = SubResource("PhysicalSkyMaterial_uxfr6")
+[sub_resource type="BoxShape3D" id="BoxShape3D_mpoo8"]
 
-[sub_resource type="Environment" id="Environment_c2466"]
-background_mode = 2
-sky = SubResource("Sky_ogklk")
-sdfgi_enabled = true
-sdfgi_use_occlusion = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.01
+[sub_resource type="BoxShape3D" id="BoxShape3D_y1rtr"]
 
 [node name="Floor1" type="Node3D"]
 
@@ -74,24 +91,32 @@ volumetric_fog_density = 0.01
 storage = ExtResource("1_tbagt")
 material = SubResource("Terrain3DMaterial_xfyna")
 assets = SubResource("Terrain3DAssets_ie1qh")
-mesh_lods = 10
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_c2466")
+environment = ExtResource("3_cflmo")
+camera_attributes = SubResource("CameraAttributesPhysical_500wa")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0463742, 0.998924, -4.78583e-10, -0.401372, -0.0186333, 0.915726, 0.914741, 0.042466, 0.401804, 0, 0, 0)
+transform = Transform3D(0.357478, 0.845499, -0.396662, 0.706666, 0.0328063, 0.706786, 0.6106, -0.532969, -0.585758, 0, 0, 0)
 shadow_enabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(0.482639, 0, 0, 0, 5.96605, 0, 0, 0, 24.552, 0, 2.97174, 0)
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D"]
+shape = SubResource("BoxShape3D_mpoo8")
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.482639, 0, 0, 0, 5.96605, 0, 0, 0, 24.552, 8.16367, 2.97174, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D2"]
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(7.84439, 0, 0, 0, 1.40413, 0, 0, 0, 24.552, 4.06065, 5.54034, 0)
 size = Vector3(1.04401, 1, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_nwecu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62892, 1.73882, 14.6651)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D3"]
+shape = SubResource("BoxShape3D_y1rtr")
+
+[node name="Player" parent="." instance=ExtResource("4_cv6df")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.82107, 3.02347, 12.1909)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcarj1k6firch"]
+[gd_scene load_steps=5 format=3 uid="uid://bcarj1k6firch"]
 
 [ext_resource type="Script" path="res://Scenes/Player.gd" id="1_5dxfo"]
 [ext_resource type="PackedScene" uid="uid://wmf2eu0uuhrg" path="res://addons/third-person-camera/third_person_camera/ThirdPersonCamera.tscn" id="2_6y4wa"]
+[ext_resource type="Environment" uid="uid://bp5bhb7uflf4n" path="res://Scenes/Floor 1.tres" id="3_jeeq5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y5ba6"]
 
@@ -14,3 +15,7 @@ shape = SubResource("CapsuleShape3D_y5ba6")
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CollisionShape3D"]
 
 [node name="ThirdPersonCamera" parent="." instance=ExtResource("2_6y4wa")]
+distance_from_pivot = 10.36
+camera_speed = 1.0
+current = true
+environment = ExtResource("3_jeeq5")
