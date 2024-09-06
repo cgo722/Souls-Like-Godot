@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6akxuc1lka15"]
+[gd_scene load_steps=7 format=3 uid="uid://b6akxuc1lka15"]
 
 [ext_resource type="PackedScene" uid="uid://bcarj1k6firch" path="res://Scenes/Player.tscn" id="1_4ejay"]
+[ext_resource type="Script" path="res://Scenes/fpscounter.gd" id="1_h730k"]
 [ext_resource type="PackedScene" uid="uid://hwmxa20vtbvh" path="res://Assets/Models/WestAfricaTerrain.tscn" id="2_c1nrs"]
 [ext_resource type="Environment" uid="uid://bp5bhb7uflf4n" path="res://Scenes/Floor 1.tres" id="3_uigns"]
 [ext_resource type="PackedScene" uid="uid://bv4mgf6bikg7c" path="res://Assets/WhiteBox/WhiteBox.tscn" id="4_l4l2o"]
+[ext_resource type="PackedScene" uid="uid://cx4rsb1sj4aeo" path="res://3rd Person camera.tscn" id="5_a2ff4"]
 
 [node name="West Africa" type="Node3D"]
+script = ExtResource("1_h730k")
 
-[node name="Player" parent="." instance=ExtResource("1_4ejay")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera_origion", "camera_3d") instance=ExtResource("1_4ejay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43108, 5.19925, -1.65683)
+cam_sens = 1.0
+camera_origion = NodePath("../Camera Origion")
+camera_3d = NodePath("../Camera Origion/SpringArm3D/Camera3D")
 
 [node name="WestAfricaTerrain" parent="." instance=ExtResource("2_c1nrs")]
 mesh_size = 20
@@ -46,3 +52,8 @@ size = Vector3(1.47119, 1.93567, 2.13379)
 
 [node name="WhiteBox7" parent="." instance=ExtResource("4_l4l2o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0983734, 0.283415, 0.227116)
+
+[node name="Camera Origion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_a2ff4")]
+player = NodePath("../Player")
+
+[editable path="Camera Origion"]

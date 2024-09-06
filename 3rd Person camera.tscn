@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx4rsb1sj4aeo"]
+
+[ext_resource type="Script" path="res://3_rd_person_camera.gd" id="1_lchyg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_twgke"]
+
+[node name="Camera Origion" type="Node3D"]
+script = ExtResource("1_lchyg")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.622879, 0)
+shape = SubResource("SphereShape3D_twgke")
+spring_length = 10.0
+margin = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.97236)
