@@ -15,7 +15,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	var look_direction = Input.get_vector("R_Left", "R_Right", "R_Up", "R_Down").normalized()
 	camera_origion.rotation_degrees += Vector3(look_direction.y, look_direction.x, 0) * cam_sens
-	print(camera_origion.rotation_degrees.x)
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 

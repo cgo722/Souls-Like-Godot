@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8hol81vwgl2v"]
+
+[ext_resource type="PackedScene" uid="uid://cif0uif12k21b" path="res://Assets/Models/island_tree_02_4k.gltf/island_tree_02_4k.gltf" id="1_woytx"]
+
+[node name="island_tree_02_4k" instance=ExtResource("1_woytx")]
+
+[node name="island_tree_02" parent="." index="0"]
+lod_bias = 0.05

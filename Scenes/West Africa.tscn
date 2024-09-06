@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6akxuc1lka15"]
+[gd_scene load_steps=8 format=3 uid="uid://b6akxuc1lka15"]
 
 [ext_resource type="PackedScene" uid="uid://bcarj1k6firch" path="res://Scenes/Player.tscn" id="1_4ejay"]
 [ext_resource type="Script" path="res://Scenes/fpscounter.gd" id="1_h730k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Environment" uid="uid://bp5bhb7uflf4n" path="res://Scenes/Floor 1.tres" id="3_uigns"]
 [ext_resource type="PackedScene" uid="uid://bv4mgf6bikg7c" path="res://Assets/WhiteBox/WhiteBox.tscn" id="4_l4l2o"]
 [ext_resource type="PackedScene" uid="uid://cx4rsb1sj4aeo" path="res://3rd Person camera.tscn" id="5_a2ff4"]
+[ext_resource type="PackedScene" uid="uid://b8hol81vwgl2v" path="res://Assets/Models/island_tree_02_4k.gltf/island_tree_02_4k.tscn" id="7_lkby1"]
 
 [node name="West Africa" type="Node3D"]
 script = ExtResource("1_h730k")
@@ -55,5 +56,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0983734, 0.283415, 0.227116
 
 [node name="Camera Origion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_a2ff4")]
 player = NodePath("../Player")
+
+[node name="island_tree_02_4k" parent="." instance=ExtResource("7_lkby1")]
+transform = Transform3D(3.9055, 0, 0, 0, 3.9055, 0, 0, 0, 3.9055, -25.1911, 1.63214, -9.34624)
+
+[node name="island_tree_02_4k2" parent="." instance=ExtResource("7_lkby1")]
+transform = Transform3D(1.26371, 0, 3.6954, 0, 3.9055, 0, -3.6954, 0, 1.26371, 13.6674, 1.63214, 17.7315)
+
+[node name="island_tree_02_4k3" parent="." instance=ExtResource("7_lkby1")]
+transform = Transform3D(1.26371, 0, 3.6954, 0, 3.9055, 0, -3.6954, 0, 1.26371, -6.32149, 1.63214, 12.0007)
 
 [editable path="Camera Origion"]
